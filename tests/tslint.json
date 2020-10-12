@@ -1,0 +1,13 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+			"tslint:recommended",
+			"../tslint.json"
+	],
+	"rules": {
+		"mocha-typescript-no-only": true
+	},
+	"rulesDirectory": [
+		"tslint-mocha-typescript-no-only"
+	]
+}

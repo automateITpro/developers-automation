@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  mongo:
+      container_name: xo-mongo
+      image: mongo
+      ports:
+        - 27017:27017
+      restart: unless-stopped

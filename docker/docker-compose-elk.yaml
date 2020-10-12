@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  elk:
+    image: sebp/elk
+    volumes:
+      - ./elk/02-beats-input.conf:/etc/logstash/conf.d/02-beats-input.conf
+      - ./elk/30-output.conf:/etc/logstash/conf.d/30-output.conf
+      - elk:/var/lib/elasticsearch
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+      - "28777:28777"
+
+volumes:
+    elk:

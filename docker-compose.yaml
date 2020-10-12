@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+  xo-backend:
+    container_name: xo-backend
+    image: xo-backend
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - MONGO_CONNECTION_STRING=mongodb://xo-mongo/tic-tac-toe
+      - LOGSTASH_HOST=xo-elk
+      - SITE_URL=http://xo-frontend
+    external_links:
+      - xo-frontend:xo-frontend
+    networks:
+      - xo-network
+  xo-mongo:
+    container_name: xo-mongo
+    image: mongo
+    volumes:
+      - mongo:/data/db
+    ports:
+      - 27017:27017
+    restart: unless-stopped
+    networks:
+      - xo-network
+  xo-elk:
+    container_name: xo-elk
+    image: sebp/elk
+    volumes:
+      - ./docker/elk/02-beats-input.conf:/etc/logstash/conf.d/02-beats-input.conf
+      - ./docker/elk/30-output.conf:/etc/logstash/conf.d/30-output.conf
+      - elk:/var/lib/elasticsearch
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+      - "28777:28777"
+    networks:
+        - xo-network
+volumes:
+    elk:
+    mongo:
+networks:
+  xo-network:
+    name: xo-network
+    driver: bridge
