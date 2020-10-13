@@ -26,3 +26,7 @@ There is separate `docker-compose` file for tests env, usable for local developm
 ## Build
 
 in project root run `docker-compose up -d` to start complete project server side stack: elk, mongo and xo-backend itself
+
+---
+
+Link to presentation recording at 👉 [automateIT](https://youtu.be/-C5ml4N4WqU) channel.
